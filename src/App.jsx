@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as weatherService from './services/weatherService';
 import WeatherSearch from './components/WeatherSearch/WeatherSearch';
 import WeatherDetails from './components/WeatherDetails/WeatherDetails';
@@ -22,6 +22,27 @@ const App = () => {
   };
 
   console.log('State:', weather); // ✅ Log state correctly
+
+  // src/App.jsx
+  // useEffect(() => {
+
+  // }, []); // An empty dependency array means this runs once after the initial render
+// src/App.jsx
+useEffect(() => {
+
+  // Define a fetch function:
+  const fetchDefaultData = async () => {
+    const data = await weatherService.show('New York');
+    const newWeatherState = {
+      location: data.location.name,
+      temperature: data.current.temp_f,
+      condition: data.current.condition.text,
+    };
+    setWeather(newWeatherState);
+  };
+  // Call the fetch function when the page loads:
+  fetchDefaultData();
+}, []);
 
   return (
     <main>
