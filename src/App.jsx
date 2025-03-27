@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import * as weatherService from './services/weatherService';
 import WeatherSearch from './components/WeatherSearch/WeatherSearch';
+import WeatherDetails from './components/WeatherDetails/WeatherDetails';
 
 const App = () => {
   const [weather, setWeather] = useState(null); // ✅ Define weather state
@@ -26,15 +27,17 @@ const App = () => {
     <main>
       <h1>Weather API</h1>
       <WeatherSearch fetchData={fetchData} />
+      <WeatherDetails weather={weather} />
+
 
       {/* ✅ Check if weather exists before rendering */}
-      {weather && (
+      {/* {weather && (
         <section>
           <h2>Weather in {weather.location}</h2>
           <p>Temperature: {weather.temperature}°F</p>
           <p>Condition: {weather.condition}</p>
         </section>
-      )}
+      )} */}
     </main>
   );
 };
